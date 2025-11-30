@@ -2,39 +2,31 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reveal.js Minimal</title>
+    <title>Reveal.js Local</title>
 
-    <!-- Reveal.js core + theme from CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css" id="theme">
-
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <link rel="stylesheet" href="reveal-local/reveal.css">
+    <link rel="stylesheet" href="reveal-local/theme.css">
+    <script src="reveal-local/reveal.js"></script>
 </head>
 <body>
 
-    <div class="reveal">
-        <div class="slides">
-            <section>
-                <h2>Hello</h2>
-                <p>This is a minimal Reveal.js slide deck.</p>
-            </section>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Hello</h2>
+            <p>This is a fully local Reveal.js demo.</p>
+        </section>
 
-            <section>
-                <h2>Second Slide</h2>
-                <p>Arrow keys move between slides.</p>
-            </section>
-
-            <!-- Vertical slides example -->
-            <section>
-                <section>Vertical Slide 1</section>
-                <section>Vertical Slide 2</section>
-            </section>
-        </div>
+        <section>
+            <h2>Second Slide</h2>
+            <p>No remote resources.</p>
+        </section>
     </div>
+</div>
 
-    <script>
-        Reveal.initialize();
-    </script>
+<script>
+    Reveal.initialize();
+</script>
 
 </body>
 </html>

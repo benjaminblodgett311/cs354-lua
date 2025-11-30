@@ -68,3 +68,7 @@ dpkg -L liblua5.4-dev | grep lua.h
 $LUA_INCLUDE=/usr/include/lua5.4
 gcc embed.c -I$LUA_INCLUDE -o embed -llua5.4 -lm -ldl
 ```
+
+## Reveal.js Slides
+
+Reveal resources taken from [https://github.com/hakimel/reveal.js/releases/tag/5.2.1](this Reveal.js release)
