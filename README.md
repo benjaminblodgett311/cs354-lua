@@ -72,3 +72,22 @@ gcc embed.c -I$LUA_INCLUDE -o embed -llua5.4 -lm -ldl
 ## Reveal.js Slides
 
 Reveal resources taken from [https://github.com/hakimel/reveal.js/releases/tag/5.2.1](this Reveal.js release)
+
+Get local Reveal.js for generating slides:
+
+```bash
+curl -L https://github.com/hakimel/reveal.js/archive/refs/heads/master.zip -o reveal.zip
+unzip reveal.zip
+mv reveal.js-master reveal-local
+rm reveal.zip
+```
+
+Generate slides.html with pandoc:
+
+```bash
+pandoc slides.md \
+    -t revealjs \
+    -s \
+    -o slides.html \
+    --variable revealjs-url=./reveal-local
+```
