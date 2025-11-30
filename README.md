@@ -89,5 +89,6 @@ pandoc slides.md \
     -t revealjs \
     -s \
     -o slides.html \
-    --variable revealjs-url=./reveal-local
+    --template=reveal-template.html \
+    -V revealjs-url=./reveal-local
 ```
