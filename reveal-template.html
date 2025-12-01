@@ -19,15 +19,33 @@ $endif$
   <link rel="stylesheet" href="$revealjs-url$/dist/reset.css">
   <link rel="stylesheet" href="$revealjs-url$/dist/reveal.css">
   <style>
+    :root {
+        --r-main-font-size: 30px !important;
+    }
     .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
+      overflow: auto;
     }
     $styles.html()$
+
+    .reveal .home-link {
+      display: inline-block;
+    }
+
+    .reveal .home-icon {
+      display: block;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .reveal .home-link:hover .home-icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+    }
+
   </style>
 $if(theme)$
   <link rel="stylesheet" href="$revealjs-url$/dist/theme/$theme$.css" id="theme">
 $else$
-  <link rel="stylesheet" href="$revealjs-url$/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="$revealjs-url$/dist/theme/white.css" id="theme">
 $endif$
 $for(css)$
   <link rel="stylesheet" href="$css$"/>

@@ -4,15 +4,18 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="">
-  <title>Lua Slides</title>
+  <title>Lua Presentation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="./reveal-local/dist/reset.css">
   <link rel="stylesheet" href="./reveal-local/dist/reveal.css">
   <style>
+    :root {
+        --r-main-font-size: 30px !important;
+    }
     .reveal .sourceCode {  /* see #7635 */
-      overflow: visible;
+      overflow: auto;
     }
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,70 +32,402 @@
       vertical-align: middle;
     }
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+    .reveal .home-link {
+      display: inline-block;
+    }
+
+    .reveal .home-icon {
+      display: block;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .reveal .home-link:hover .home-icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.6));
+    }
+
   </style>
-  <link rel="stylesheet" href="./reveal-local/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="./reveal-local/dist/theme/white.css" id="theme">
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">Lua Slides</h1>
-  <p class="author"><a href="index.html"><img
-data-src="icons/home.png" /></a></p>
+  <h1 class="title">Lua Presentation</h1>
+  <p class="author"><a href="index.html" class="home-link"><img
+data-src="icons/home.png" class="home-icon" /></a></p>
 </section>
 
 <section id="welcome" class="slide level1">
 <h1>Welcome</h1>
-<p>This is your slideshow, generated from Markdown.</p>
-</section>
-<section id="what-this-is" class="slide level1">
-<h1>What This Is</h1>
 <ul>
-<li>Markdown → Reveal.js</li>
-<li>Built with Pandoc</li>
-<li>Using CDN assets</li>
-<li>Linked from your index.html</li>
+<li>CS 354 – Programming Languages</li>
+<li>Team project: Lua as an embedded language</li>
+<li>Goal: combine C performance with Lua expressiveness</li>
 </ul>
 </section>
-<section id="lua" class="slide level1">
-<h1>Lua</h1>
+<section id="our-problem" class="slide level1">
+<h1>Our Problem</h1>
 <ul>
-<li>Lightweight</li>
-<li>Embeddable</li>
-<li>Great for scripting</li>
+<li>Fast languages like C and C++ are powerful</li>
+<li>But high-level logic in C can be verbose and rigid</li>
+<li>We want:
+<ul>
+<li>Low-level speed</li>
+<li>High-level expressiveness</li>
+<li>A clean way to mix both</li>
+</ul></li>
+</ul>
+</section>
+<section id="our-solution" class="slide level1">
+<h1>Our Solution</h1>
+<ul>
+<li>Keep C for performance-critical code</li>
+<li>Embed Lua as a scripting layer</li>
+<li>Lua handles:
+<ul>
+<li>Configuration</li>
+<li>High-level logic</li>
+<li>Rapid iteration</li>
+</ul></li>
+<li>Result: C + Lua together as one system</li>
+</ul>
+</section>
+<section id="what-is-lua" class="slide level1">
+<h1>What Is Lua?</h1>
+<ul>
+<li>Lightweight, embeddable scripting language</li>
+<li>Designed in the early 1990s at PUC-Rio</li>
+<li>Small, portable implementation in C</li>
+<li>Used in games, tools, embedded systems, and more</li>
+</ul>
+</section>
+<section id="why-lua" class="slide level1">
+<h1>Why Lua?</h1>
+<ul>
+<li>Simple core language, small standard library</li>
+<li>Easy to embed in C</li>
+<li>Dynamic types and flexible tables</li>
+<li>Fast enough for scripting and game logic</li>
+<li>Excellent balance of:
+<ul>
+<li>Implementation size</li>
+<li>Speed</li>
+<li>Expressiveness</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-features-overview" class="slide level1">
+<h1>Key Features Overview</h1>
+<ul>
+<li>Tables: one structure for arrays and maps</li>
+<li>Functions as first-class values</li>
+<li>Closures: functions that remember state</li>
+<li>Coroutines for cooperative multitasking</li>
+<li>Designed from the start to be embedded in C</li>
+</ul>
+</section>
+<section id="tables" class="slide level1">
+<h1>Tables</h1>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">t</span> <span class="op">=</span> <span class="op">{}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">t</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;hello&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">t</span><span class="op">[</span><span class="st">&quot;name&quot;</span><span class="op">]</span> <span class="op">=</span> <span class="st">&quot;Ben&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span><span class="va">t</span><span class="op">[</span><span class="dv">1</span><span class="op">])</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span><span class="va">t</span><span class="op">.</span><span class="va">name</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>One flexible structure</li>
+<li>Act as arrays, maps or objects</li>
+</ul>
+</section>
+<section id="closures" class="slide level1">
+<h1>Closures</h1>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> make_counter<span class="op">()</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">local</span> <span class="va">n</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">function</span><span class="op">()</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">n</span> <span class="op">=</span> <span class="va">n</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">n</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="va">c</span> <span class="op">=</span> make_counter<span class="op">()</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>c<span class="op">())</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span><span class="op">(</span>c<span class="op">())</span></span></code></pre></div>
+<ul>
+<li>Very compact way to express stateful objects</li>
+</ul>
+</section>
+<section id="coroutines" class="slide level1">
+<h1>Coroutines</h1>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode lua"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">co</span> <span class="op">=</span> <span class="fu">coroutine.create</span><span class="op">(</span><span class="kw">function</span><span class="op">()</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span><span class="op">(</span><span class="st">&quot;step 1&quot;</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coroutine.yield</span><span class="op">()</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span><span class="op">(</span><span class="st">&quot;step 2&quot;</span><span class="op">)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span><span class="op">)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">coroutine.resume</span><span class="op">(</span><span class="va">co</span><span class="op">)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coroutine.resume</span><span class="op">(</span><span class="va">co</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Controlled pause and resume</li>
+<li>Great for scripting sequences, game events, and more</li>
 </ul>
 </section>
 <section id="c-lua-together" class="slide level1">
 <h1>C + Lua Together</h1>
 <ul>
-<li>Call Lua from C</li>
-<li>Call C from Lua</li>
-<li>Embed logic cleanly</li>
-</ul>
-</section>
-<section id="vertical-slides" class="slide level1">
-<h1>Vertical Slides</h1>
-<p>Press ↓</p>
-<p>+++ ## Vertical Slide 1 This is slide 1 in a vertical stack.</p>
-<p>+++ ## Vertical Slide 2 This is slide 2 in a vertical stack.</p>
-</section>
-<section id="random-facts" class="slide level1">
-<h1>Random Facts</h1>
+<li>C handles:
 <ul>
-<li>The Moon drifts 3.8 cm per year<br />
-</li>
-<li>Honey never spoils<br />
-</li>
-<li>Popcorn existed pre-Aztecs<br />
-</li>
-<li>Cats do not taste sweetness</li>
+<li>Performance-critical code</li>
+<li>System calls, memory, hardware</li>
+</ul></li>
+<li>Lua handles:
+<ul>
+<li>High-level logic</li>
+<li>Config, scripting, behavior</li>
+</ul></li>
+<li>They communicate through the Lua C API</li>
 </ul>
 </section>
-<section id="final-slide" class="slide level1">
-<h1>Final Slide</h1>
-<p>Thanks for watching.</p>
-<p><a href="index.html">← Back to index</a></p>
+<section id="solution" class="slide level1">
+<h1>Solution</h1>
+<ul>
+<li>Create a Lua state in C</li>
+<li>Run Lua code from C</li>
+<li>Call Lua functions from C</li>
+<li>Expose C functions to Lua</li>
+</ul>
+</section>
+<section id="embed-example" class="slide level1">
+<h1>Embed Example</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;lua.h&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;lualib.h&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;lauxlib.h&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> c_add<span class="op">(</span>lua_State <span class="op">*</span>L<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> a <span class="op">=</span> luaL_checknumber<span class="op">(</span>L<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> b <span class="op">=</span> luaL_checknumber<span class="op">(</span>L<span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    lua_pushnumber<span class="op">(</span>L<span class="op">,</span> a <span class="op">+</span> b<span class="op">);</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    lua_State <span class="op">*</span>L <span class="op">=</span> luaL_newstate<span class="op">();</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    luaL_openlibs<span class="op">(</span>L<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    luaL_dostring<span class="op">(</span>L<span class="op">,</span> <span class="st">&quot;print(&#39;Hello from Lua!&#39;)&quot;</span><span class="op">);</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    luaL_dostring<span class="op">(</span>L<span class="op">,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;function add(x, y)</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;    return x + y</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;end&quot;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    lua_getglobal<span class="op">(</span>L<span class="op">,</span> <span class="st">&quot;add&quot;</span><span class="op">);</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    lua_pushnumber<span class="op">(</span>L<span class="op">,</span> <span class="dv">10</span><span class="op">);</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    lua_pushnumber<span class="op">(</span>L<span class="op">,</span> <span class="dv">32</span><span class="op">);</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    lua_call<span class="op">(</span>L<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;Lua result: </span><span class="sc">%.0f\n</span><span class="st">&quot;</span><span class="op">,</span> lua_tonumber<span class="op">(</span>L<span class="op">,</span> <span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    lua_pop<span class="op">(</span>L<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    lua_pushcfunction<span class="op">(</span>L<span class="op">,</span> c_add<span class="op">);</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    lua_setglobal<span class="op">(</span>L<span class="op">,</span> <span class="st">&quot;c_add&quot;</span><span class="op">);</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    luaL_dostring<span class="op">(</span>L<span class="op">,</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;print(&#39;C add result:&#39;, c_add(5, 7))&quot;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">);</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    lua_close<span class="op">(</span>L<span class="op">);</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="compile-and-run-instructions" class="slide level1">
+<h1>Compile and Run Instructions</h1>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Lua and dev headers (Debian/Ubuntu):</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install lua5.4 liblua5.4-dev</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find Lua headers:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">dpkg</span> <span class="at">-L</span> liblua5.4-dev <span class="kw">|</span> <span class="fu">grep</span> lua.h</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compile and link:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="va">LUA_INCLUDE</span><span class="op">=</span>/usr/include/lua5.4</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gcc</span> embed.c <span class="at">-I</span><span class="st">&quot;</span><span class="va">$LUA_INCLUDE</span><span class="st">&quot;</span> <span class="at">-o</span> embed <span class="at">-llua5.4</span> <span class="at">-lm</span> <span class="at">-ldl</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">./embed</span></span></code></pre></div>
+</section>
+<section class="slide level1">
+
+<h2 id="our-team-program-experience">Our Team Program: Experience</h2>
+<ul>
+<li>Learning curve:
+<ul>
+<li>Understanding the Lua C API</li>
+<li>Stack-based value passing</li>
+</ul></li>
+<li>Wins:
+<ul>
+<li>Quick iteration by editing Lua scripts</li>
+<li>C code stayed smaller and more focused</li>
+</ul></li>
+<li>Takeaway:
+<ul>
+<li>Embedding Lua directly addresses “fast but verbose” C</li>
+</ul></li>
+</ul>
+</section>
+<section id="language-comparison" class="slide level1">
+<h1>Language Comparison</h1>
+<ul>
+<li>C
+<ul>
+<li>Very fast, low-level, explicit memory management</li>
+<li>More verbose for high-level logic</li>
+</ul></li>
+<li>Lua
+<ul>
+<li>Smaller, lighter, and easy to embed</li>
+<li>Dynamic, concise syntax</li>
+</ul></li>
+<li>Python / JavaScript
+<ul>
+<li>Very expressive with large ecosystems</li>
+<li>Heavier runtimes, not designed specifically for embedding</li>
+</ul></li>
+</ul>
+</section>
+<section id="why-lua-works-here" class="slide level1">
+<h1>Why Lua Works Here</h1>
+<ul>
+<li>Designed to be a C library</li>
+<li>Small, predictable runtime</li>
+<li>C and Lua feel like one program:
+<ul>
+<li>C: “engine”</li>
+<li>Lua: “scripted brain”</li>
+</ul></li>
+<li>Direct mapping to our project goal:
+<ul>
+<li>Keep speed</li>
+<li>Reduce verbosity</li>
+</ul></li>
+</ul>
+</section>
+<section id="installing-lua" class="slide level1">
+<h1>Installing Lua</h1>
+<ul>
+<li>On Linux:
+<ul>
+<li><code>sudo apt install lua5.4 liblua5.4-dev</code></li>
+</ul></li>
+<li>On macOS:
+<ul>
+<li><code>brew install lua</code></li>
+</ul></li>
+<li>From source:
+<ul>
+<li>Download from <code>lua.org</code></li>
+<li>Build with standard tools</li>
+</ul></li>
+</ul>
+</section>
+<section id="reveal.js-slides" class="slide level1">
+<h1>Reveal.js Slides</h1>
+<ul>
+<li>Slides written in Markdown</li>
+<li>Converted with Pandoc to Reveal.js</li>
+<li>Hosted as <code>slides.html</code> in the same directory</li>
+<li>Linked from the team website</li>
+</ul>
+</section>
+<section id="references" class="slide level1">
+<h1>References</h1>
+<ul>
+<li><p>Official Lua website<br />
+<a href="https://www.lua.org/"
+class="uri">https://www.lua.org/</a></p></li>
+<li><p>Lua 5.4 Reference Manual<br />
+<a href="https://www.lua.org/manual/5.4/"
+class="uri">https://www.lua.org/manual/5.4/</a></p></li>
+<li><p>Programming in Lua (online edition)<br />
+<a href="https://www.lua.org/pil/"
+class="uri">https://www.lua.org/pil/</a></p></li>
+<li><p>About Lua (history and design)<br />
+<a href="https://www.lua.org/about.html/"
+class="uri">https://www.lua.org/about.html/</a></p></li>
+</ul>
+</section>
+<section id="questions" class="slide level1">
+<h1>Questions?</h1>
+<p><a href="index.html" class="home-link"><img data-src="icons/home.png"
+class="home-icon" /></a></p>
 </section>
     </div>
   </div>
