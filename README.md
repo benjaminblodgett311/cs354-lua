@@ -95,17 +95,18 @@ pandoc slides.md \
 
 ## Highlight.js Syntax Highlighting
 
-The homepage utilizes a local ``highlight.min.js`` solution for syntax highlighting, along with the ``a11y-dark.min.css`` color scheme:
+The homepage utilizes a local [Highlight.js](https://highlightjs.org) solution for syntax highlighting, along with the ``base16-chalk.min.css`` color scheme:
 
 ```bash
-curl -o highlightjs/highlight.min.js \
-    https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js
-curl -o highlightjs/a11y-dark.min.css \
-    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/a11y-dark.min.css
-curl -o highlightjs/base16-apprentice.min.css \
-    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/apprentice.min.css
-curl -o highlightjs/base16-atlas.min.css \
-    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/atlas.min.css
 curl -o highlightjs/base16-chalk.min.css \
     https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/chalk.min.css
+```
+
+## Animate.css Animations
+
+The project uses [Animate.css](https://animate.style) to draw attention to our slides presentation button:
+
+```bash
+curl -o animatecss/animate.min.css \
+    https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
 ```
