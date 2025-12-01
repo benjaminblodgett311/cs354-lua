@@ -203,19 +203,6 @@ gcc embed.c -I"$LUA_INCLUDE" -o embed -llua5.4 -lm -ldl
 
 ---
 
-## Our Team Program: Experience
-
-- Learning curve:
-    - Understanding the Lua C API
-    - Stack-based value passing
-- Wins:
-    - Quick iteration by editing Lua scripts
-    - C code stayed smaller and more focused
-- Takeaway:
-    - Embedding Lua directly addresses “fast but verbose” C
-
----
-
 # Language Comparison
 
 - C
@@ -266,17 +253,13 @@ gcc embed.c -I"$LUA_INCLUDE" -o embed -llua5.4 -lm -ldl
 
 # References
 
-- Official Lua website  
-  <https://www.lua.org/>
+- [Official Lua website](https://www.lua.org)
 
-- Lua 5.4 Reference Manual  
-  <https://www.lua.org/manual/5.4/>
+- [Lua 5.4 Reference Manual](https://www.lua.org/manual/5.4)
 
-- Programming in Lua (online edition)  
-  <https://www.lua.org/pil/>
+- [Programming in Lua](https://www.lua.org/pil)
 
-- About Lua (history and design)  
-  <https://www.lua.org/about.html/>
+- [About Lua](https://www.lua.org/about.html)
 
 ---
 

@@ -10,22 +10,21 @@
         <header class="hero">
             <div class="container">
                 <nav class="top-nav">
-                    <div class="logo">Lua + C</div>
+                    <div class="logo">Lua Language Assignment</div>
                     <ul class="nav-links">
                         <li><a href="#overview">Overview</a></li>
                         <li><a href="#features">Language Features</a></li>
-                        <li><a href="#embedding">Embedding</a></li>
                         <li><a href="#examples">Examples</a></li>
+                        <li><a href="#embedding">Embedding</a></li>
                         <li><a href="#install">Installation</a></li>
                         <li><a href="#comparison">Comparison</a></li>
                         <li><a href="#references">References</a></li>
                     </ul>
                 </nav>
                 <div class="hero-content">
-                    <h1>Lua: Lightweight Power Inside C</h1>
+                    <h1>About Lua</h1>
                     <p>
-                        Our CS 354 team explores how embedding Lua inside C combines high performance
-                        with concise, expressive code.
+                        Our team embedded Lua inside of C to learn more about the Lua language.
                     </p>
                     <a class="slides-button" href="slides.html">Watch the presentation</a>
                 </div>
@@ -128,7 +127,72 @@ coroutine.resume(co)</code></pre>
                 </div>
             </section>
 
-            <section id="embedding" class="section">
+            <section id="examples" class="section">
+                <div class="container">
+                    <h2>Example Programs</h2>
+
+                    <div class="grid two-column">
+                        <div>
+                            <h3>Simple Lua: Hello World</h3>
+                            <p>
+                                A minimal Lua program that prints a greeting.
+                            </p>
+                            <pre><code>print("Hello, Lua!")</code></pre>
+                            <div class="callout">
+                                <h4>Build/Run Steps</h4>
+                                <ol>
+                                    <li>Save the code as <code>hello.lua</code>.</li>
+                                    <li>Run it with the Lua interpreter:</li>
+                                </ol>
+                                <pre><code>lua hello.lua</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3>Simple Lua: Counter with Closure</h3>
+                            <p>
+                                A tiny stateful object implemented as a closure.
+                            </p>
+                            <pre><code>function make_counter()
+    local n = 0
+    return function()
+        n = n + 1
+        return n
+    end
+end
+
+c = make_counter()
+print(c())
+print(c())</code></pre>
+                            <div class="callout">
+                                <h4>Build/Run Steps</h4>
+                                <ol>
+                                    <li>Save the code as <code>counter.lua</code>.</li>
+                                    <li>Run it with the Lua interpreter:</li>
+                                </ol>
+                                <pre><code>lua counter.lua</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="complex-example">
+                        <h3>Team Demonstration Program: C + Lua</h3>
+                        <p>
+                            The provided C code hosts Lua, defines a Lua function <code>add</code>, calls it from C, and then exposes a C function <code>c_add</code> to Lua. This demonstrates:
+                        </p>
+                        <ul>
+                            <li>Bidirectional communication: C calls Lua and Lua calls C.</li>
+                            <li>Using Lua for high-level arithmetic or logic.</li>
+                            <li>Keeping the performance-critical parts in C.</li>
+                        </ul>
+                        <p>
+                            See the section below for build and run steps for this program.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="embedding" class="section section-alt">
                 <div class="container">
                     <h2>Embedding Lua Inside C</h2>
                     <div class="grid two-column">
@@ -228,74 +292,6 @@ gcc embed.c -I"$LUA_INCLUDE" -o embed -llua5.4 -lm -ldl</code></pre>
                             <li>Run the program:</li>
                         </ol>
                         <pre><code>./embed</code></pre>
-                    </div>
-                </div>
-            </section>
-
-            <section id="examples" class="section section-alt">
-                <div class="container">
-                    <h2>Example Programs</h2>
-
-                    <div class="grid two-column">
-                        <div>
-                            <h3>Simple Lua: Hello World</h3>
-                            <p>
-                                A minimal Lua program that prints a greeting.
-                            </p>
-                            <pre><code>print("Hello, Lua!")</code></pre>
-                            <div class="callout">
-                                <h4>Build/Run Steps</h4>
-                                <ol>
-                                    <li>Save the code as <code>hello.lua</code>.</li>
-                                    <li>Run it with the Lua interpreter:</li>
-                                </ol>
-                                <pre><code>lua hello.lua</code></pre>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3>Simple Lua: Counter with Closure</h3>
-                            <p>
-                                A tiny stateful object implemented as a closure.
-                            </p>
-                            <pre><code>function make_counter()
-    local n = 0
-    return function()
-        n = n + 1
-        return n
-    end
-end
-
-c = make_counter()
-print(c())
-print(c())</code></pre>
-                            <div class="callout">
-                                <h4>Build/Run Steps</h4>
-                                <ol>
-                                    <li>Save the code as <code>counter.lua</code>.</li>
-                                    <li>Run it with the Lua interpreter:</li>
-                                </ol>
-                                <pre><code>lua counter.lua</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="complex-example">
-                        <h3>Team Demonstration Program: C + Lua</h3>
-                        <p>
-                            For our team program, we focused on the embedded example shown above. The C
-                            code hosts Lua, defines a Lua function <code>add</code>, calls it from C, and then
-                            exposes a C function <code>c_add</code> to Lua. This demonstrates:
-                        </p>
-                        <ul>
-                            <li>Bidirectional communication: C calls Lua and Lua calls C.</li>
-                            <li>Using Lua for high-level arithmetic or logic.</li>
-                            <li>Keeping the performance-critical parts in C.</li>
-                        </ul>
-                        <p>
-                            The build and run steps for this program are the same as the steps in the
-                            embedding section above.
-                        </p>
                     </div>
                 </div>
             </section>
@@ -414,13 +410,6 @@ print(c())</code></pre>
                             </tbody>
                         </table>
                     </div>
-
-                    <p>
-                        In our project, we keep C where we need raw speed and low-level control, and we
-                        write higher-level behavior in Lua. This directly targets our original problem:
-                        we do not want to give up performance, but we also do not want every piece of
-                        high-level logic to be written in verbose C.
-                    </p>
                 </div>
             </section>
 
@@ -467,13 +456,12 @@ print(c())</code></pre>
                     <ul>
                         <li>
                             <a href="slides.html">
-                                Reveal.js Slides for Our Team Presentation
+                                Presentation Slides
                             </a>
                         </li>
                         <li>
-                            Reveal.js release used for our slides:
                             <a href="https://github.com/hakimel/reveal.js/releases/tag/5.2.1" target="_blank" rel="noopener noreferrer">
-                                Reveal.js 5.2.1
+                                Reveal.js release 5.2.1
                             </a>
                         </li>
                     </ul>
@@ -484,7 +472,6 @@ print(c())</code></pre>
         <footer class="footer">
             <div class="container footer-inner">
                 <p>CS 354 – Programming Languages • Lua Team Website</p>
-                <a href="slides.html" class="footer-slides-link">Watch the presentation</a>
             </div>
         </footer>
     </body>
