@@ -92,3 +92,20 @@ pandoc slides.md \
     --template=reveal-template.html \
     -V revealjs-url=./reveal-local
 ```
+
+## Highlight.js Syntax Highlighting
+
+The homepage utilizes a local ``highlight.min.js`` solution for syntax highlighting, along with the ``a11y-dark.min.css`` color scheme:
+
+```bash
+curl -o highlightjs/highlight.min.js \
+    https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js
+curl -o highlightjs/a11y-dark.min.css \
+    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release/build/styles/a11y-dark.min.css
+curl -o highlightjs/base16-apprentice.min.css \
+    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/apprentice.min.css
+curl -o highlightjs/base16-atlas.min.css \
+    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/atlas.min.css
+curl -o highlightjs/base16-chalk.min.css \
+    https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/chalk.min.css
+```
