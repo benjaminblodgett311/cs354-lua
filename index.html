@@ -1,12 +1,493 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Slides</title>
-</head>
-<body>
-    <h1>Slides</h1>
-    <p><a href="slides.html">Click here to view the slideshow</a></p>
-</body>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Lua Embedded in C – CS 354 Team</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="hero">
+            <div class="container">
+                <nav class="top-nav">
+                    <div class="logo">Lua + C</div>
+                    <ul class="nav-links">
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#features">Language Features</a></li>
+                        <li><a href="#embedding">Embedding</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="#install">Installation</a></li>
+                        <li><a href="#comparison">Comparison</a></li>
+                        <li><a href="#references">References</a></li>
+                    </ul>
+                    <a class="slides-button" href="slides.html">Watch the presentation</a>
+                </nav>
+                <div class="hero-content">
+                    <h1>Lua: Lightweight Power Inside C</h1>
+                    <p>
+                        Our CS 354 team explores how embedding Lua inside C combines high performance
+                        with concise, expressive code.
+                    </p>
+                    <a class="hero-slides-button" href="slides.html">Open Reveal.js Slides</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section id="overview" class="section">
+                <div class="container">
+                    <h2>Language Overview and History</h2>
+                    <div class="grid two-column">
+                        <div>
+                            <h3>What is Lua?</h3>
+                            <p>
+                                Lua is a lightweight, embeddable scripting language designed to be
+                                integrated into larger applications, especially those written in C or C++.
+                                It focuses on simplicity, portability, and speed.
+                            </p>
+                            <p>
+                                Lua was created in the early 1990s at the Pontifical Catholic University
+                                of Rio de Janeiro (PUC-Rio) by Roberto Ierusalimschy, Luiz Henrique de
+                                Figueiredo, and Waldemar Celes. It has since been used in many production
+                                systems, including game engines and embedded tools.
+                            </p>
+                        </div>
+                        <div>
+                            <h3>Our Project Theme</h3>
+                            <p>
+                                Problem: fast languages like C and C++ are often verbose when you try to
+                                express higher level logic.
+                            </p>
+                            <p>
+                                Our solution: keep C for performance and system access, and embed Lua to
+                                write concise, high-level logic. Lua runs inside the C program as a small,
+                                flexible scripting engine.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="section section-alt">
+                <div class="container">
+                    <h2>Key Lua Features</h2>
+                    <p>
+                        Lua provides several language features that make it attractive as an embedded,
+                        high-level partner to C.
+                    </p>
+
+                    <div class="feature-grid">
+                        <div class="card">
+                            <h3>Dynamic Tables</h3>
+                            <p>
+                                Lua tables unify arrays and maps into a single data structure, letting us
+                                mix numeric and string keys in the same object.
+                            </p>
+                            <pre><code>t = {}
+t[1] = "hello"
+t["name"] = "Ben"
+
+print(t[1])
+print(t.name)</code></pre>
+                        </div>
+
+                        <div class="card">
+                            <h3>Closures</h3>
+                            <p>
+                                Functions can capture local variables and remember state between calls,
+                                giving us simple, functional-style abstractions.
+                            </p>
+                            <pre><code>function make_counter()
+    local n = 0
+    return function()
+        n = n + 1
+        return n
+    end
+end
+
+c = make_counter()
+print(c())
+print(c())</code></pre>
+                        </div>
+
+                        <div class="card">
+                            <h3>Coroutines</h3>
+                            <p>
+                                Coroutines let us pause and resume computations, which is useful for
+                                cooperative multitasking and scripting game logic.
+                            </p>
+                            <pre><code>co = coroutine.create(function()
+    print("step 1")
+    coroutine.yield()
+    print("step 2")
+end)
+
+coroutine.resume(co)
+coroutine.resume(co)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="embedding" class="section">
+                <div class="container">
+                    <h2>Embedding Lua Inside C</h2>
+                    <div class="grid two-column">
+                        <div>
+                            <h3>Why Embed Lua?</h3>
+                            <p>
+                                C gives us control, speed, and access to the system. Lua gives us a compact
+                                syntax, dynamic structures, and faster iteration on logic. By embedding Lua:
+                            </p>
+                            <ul>
+                                <li>C controls performance-critical code and integration with the OS.</li>
+                                <li>Lua scripts express higher-level behavior and configuration.</li>
+                                <li>We can change behavior by editing Lua code without recompiling C.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Project Focus</h3>
+                            <p>
+                                Our team demonstration program shows how a C host can:
+                            </p>
+                            <ul>
+                                <li>Initialize a Lua state and load the standard libraries.</li>
+                                <li>Define and call Lua functions from C.</li>
+                                <li>Expose C functions to Lua as if they were built-in.</li>
+                            </ul>
+                            <p>
+                                This illustrates how embedding Lua helps reduce verbosity in the high-level
+                                parts of an otherwise low-level, performance-oriented program.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 class="subheading">Minimal C + Lua Embed Example</h3>
+                    <p>
+                        The program below creates a Lua state, runs simple Lua code, calls a Lua function
+                        from C, and registers a C function that Lua can call.
+                    </p>
+
+                    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;lua.h&gt;
+#include &lt;lualib.h&gt;
+#include &lt;lauxlib.h&gt;
+
+static int c_add(lua_State *L) {
+    double a = luaL_checknumber(L, 1);
+    double b = luaL_checknumber(L, 2);
+    lua_pushnumber(L, a + b);
+    return 1;
+}
+
+int main(void) {
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+
+    luaL_dostring(L, "print('Hello from Lua!')");
+
+    luaL_dostring(L,
+        "function add(x, y)\n"
+        "    return x + y\n"
+        "end"
+    );
+
+    lua_getglobal(L, "add");
+    lua_pushnumber(L, 10);
+    lua_pushnumber(L, 32);
+    lua_call(L, 2, 1);
+    printf("Lua result: %.0f\n", lua_tonumber(L, -1));
+    lua_pop(L, 1);
+
+    lua_pushcfunction(L, c_add);
+    lua_setglobal(L, "c_add");
+
+    luaL_dostring(L,
+        "print('C add result:', c_add(5, 7))"
+    );
+
+    lua_close(L);
+    return 0;
+}</code></pre>
+
+                    <div class="callout">
+                        <h4>Build and Run: C Program with Embedded Lua</h4>
+                        <ol>
+                            <li>Install Lua development packages on Debian/Ubuntu:</li>
+                        </ol>
+                        <pre><code>sudo apt install lua5.4 liblua5.4-dev</code></pre>
+                        <ol start="2">
+                            <li>Locate the Lua include directory:</li>
+                        </ol>
+                        <pre><code>dpkg -L liblua5.4-dev | grep lua.h</code></pre>
+                        <ol start="3">
+                            <li>Compile the program (example path shown for Lua 5.4):</li>
+                        </ol>
+                        <pre><code>LUA_INCLUDE=/usr/include/lua5.4
+gcc embed.c -I"$LUA_INCLUDE" -o embed -llua5.4 -lm -ldl</code></pre>
+                        <ol start="4">
+                            <li>Run the program:</li>
+                        </ol>
+                        <pre><code>./embed</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="examples" class="section section-alt">
+                <div class="container">
+                    <h2>Example Programs</h2>
+
+                    <div class="grid two-column">
+                        <div>
+                            <h3>Simple Lua: Hello World</h3>
+                            <p>
+                                A minimal Lua program that prints a greeting.
+                            </p>
+                            <pre><code>print("Hello, Lua!")</code></pre>
+                            <div class="callout">
+                                <h4>Build/Run Steps</h4>
+                                <ol>
+                                    <li>Save the code as <code>hello.lua</code>.</li>
+                                    <li>Run it with the Lua interpreter:</li>
+                                </ol>
+                                <pre><code>lua hello.lua</code></pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3>Simple Lua: Counter with Closure</h3>
+                            <p>
+                                A tiny stateful object implemented as a closure.
+                            </p>
+                            <pre><code>function make_counter()
+    local n = 0
+    return function()
+        n = n + 1
+        return n
+    end
+end
+
+c = make_counter()
+print(c())
+print(c())</code></pre>
+                            <div class="callout">
+                                <h4>Build/Run Steps</h4>
+                                <ol>
+                                    <li>Save the code as <code>counter.lua</code>.</li>
+                                    <li>Run it with the Lua interpreter:</li>
+                                </ol>
+                                <pre><code>lua counter.lua</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="complex-example">
+                        <h3>Team Demonstration Program: C + Lua</h3>
+                        <p>
+                            For our team program, we focused on the embedded example shown above. The C
+                            code hosts Lua, defines a Lua function <code>add</code>, calls it from C, and then
+                            exposes a C function <code>c_add</code> to Lua. This demonstrates:
+                        </p>
+                        <ul>
+                            <li>Bidirectional communication: C calls Lua and Lua calls C.</li>
+                            <li>Using Lua for high-level arithmetic or logic.</li>
+                            <li>Keeping the performance-critical parts in C.</li>
+                        </ul>
+                        <p>
+                            The build and run steps for this program are the same as the steps in the
+                            embedding section above.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="install" class="section">
+                <div class="container">
+                    <h2>Translators and Installation</h2>
+                    <p>
+                        Lua is distributed as source and is typically compiled as a library plus a small
+                        standalone interpreter. Below are practical installation steps for our environment.
+                    </p>
+
+                    <h3>Lua Interpreter and Libraries (Linux)</h3>
+                    <ol>
+                        <li>Install the interpreter and development files on Debian/Ubuntu:</li>
+                    </ol>
+                    <pre><code>sudo apt install lua5.4 liblua5.4-dev</code></pre>
+                    <ol start="2">
+                        <li>Verify that Lua is available:</li>
+                    </ol>
+                    <pre><code>lua -v</code></pre>
+
+                    <h3>Lua on Other Platforms</h3>
+                    <ul>
+                        <li>
+                            Windows and macOS users can download source or binaries from the
+                            official Lua site and follow its build instructions.
+                        </li>
+                        <li>
+                            On macOS with Homebrew, Lua can be installed with a single command
+                            such as <code>brew install lua</code>.
+                        </li>
+                    </ul>
+
+                    <h3>Using Lua as an Embedded Translator</h3>
+                    <ul>
+                        <li>Include Lua headers from the Lua development package.</li>
+                        <li>Link against the Lua library when compiling C programs.</li>
+                        <li>Use the Lua C API to load scripts, run code, and move values between C and Lua.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="comparison" class="section section-alt">
+                <div class="container">
+                    <h2>Language Comparison</h2>
+                    <p>
+                        Our main design question was how to balance speed and verbosity. The table below
+                        compares Lua with some representative languages we care about in this project.
+                    </p>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Lua</th>
+                                    <th>C</th>
+                                    <th>Python</th>
+                                    <th>JavaScript</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Primary role in our project</td>
+                                    <td>Embedded scripting language</td>
+                                    <td>Host language, performance core</td>
+                                    <td>General scripting / prototyping</td>
+                                    <td>Web and general scripting</td>
+                                </tr>
+                                <tr>
+                                    <td>Execution model</td>
+                                    <td>Interpreted/bytecode VM</td>
+                                    <td>Compiled to native code</td>
+                                    <td>Interpreted/JIT</td>
+                                    <td>Interpreted/JIT</td>
+                                </tr>
+                                <tr>
+                                    <td>Typing</td>
+                                    <td>Dynamically typed</td>
+                                    <td>Statically typed</td>
+                                    <td>Dynamically typed</td>
+                                    <td>Dynamically typed</td>
+                                </tr>
+                                <tr>
+                                    <td>Typical verbosity</td>
+                                    <td>Compact syntax, few core constructs</td>
+                                    <td>Verbose for high-level logic</td>
+                                    <td>Readable but larger runtime</td>
+                                    <td>Flexible but tied to larger runtimes</td>
+                                </tr>
+                                <tr>
+                                    <td>Embedding into C</td>
+                                    <td>Designed for embedding, small library</td>
+                                    <td>N/A (host)</td>
+                                    <td>Possible but heavier integration</td>
+                                    <td>Possible via engines, more overhead</td>
+                                </tr>
+                                <tr>
+                                    <td>Use cases</td>
+                                    <td>Game scripting, configuration, plugins</td>
+                                    <td>Systems programming, performance-critical code</td>
+                                    <td>Data science, scripting, automation</td>
+                                    <td>Web apps, browser scripts, servers</td>
+                                </tr>
+                                <tr>
+                                    <td>Balance of speed and expressiveness</td>
+                                    <td>
+                                        Fast enough for most logic, concise, and
+                                        easy to embed in C
+                                    </td>
+                                    <td>Very fast, but high-level code can be verbose</td>
+                                    <td>Expressive, slower, larger runtime</td>
+                                    <td>Expressive, usually JIT-accelerated, heavier engines</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        In our project, we keep C where we need raw speed and low-level control, and we
+                        write higher-level behavior in Lua. This directly targets our original problem:
+                        we do not want to give up performance, but we also do not want every piece of
+                        high-level logic to be written in verbose C.
+                    </p>
+                </div>
+            </section>
+
+            <section id="references" class="section">
+                <div class="container">
+                    <h2>References and Documentation Links</h2>
+                    <p>
+                        These are the main resources we used to learn Lua and to build our examples.
+                    </p>
+                    <h3>Official Documentation</h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.lua.org/" target="_blank" rel="noopener noreferrer">
+                                Lua.org – Official Website
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.lua.org/manual/5.4/" target="_blank" rel="noopener noreferrer">
+                                Lua 5.4 Reference Manual
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.lua.org/pil/" target="_blank" rel="noopener noreferrer">
+                                Programming in Lua (online edition)
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3>Tutorials and Guides</h3>
+                    <ul>
+                        <li>
+                            <a href="https://www.lua.org/docs.html" target="_blank" rel="noopener noreferrer">
+                                Lua Documentation and Tutorials Index
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.lua.org/about.html" target="_blank" rel="noopener noreferrer">
+                                About Lua – Design and History
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h3>Slides and Tools</h3>
+                    <ul>
+                        <li>
+                            <a href="slides.html">
+                                Reveal.js Slides for Our Team Presentation
+                            </a>
+                        </li>
+                        <li>
+                            Reveal.js release used for our slides:
+                            <a href="https://github.com/hakimel/reveal.js/releases/tag/5.2.1" target="_blank" rel="noopener noreferrer">
+                                Reveal.js 5.2.1
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container footer-inner">
+                <p>CS 354 – Programming Languages • Lua Team Website</p>
+                <a href="slides.html" class="footer-slides-link">Watch the presentation</a>
+            </div>
+        </footer>
+    </body>
 </html>
 
