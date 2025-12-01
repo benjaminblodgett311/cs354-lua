@@ -92,3 +92,12 @@ pandoc slides.md \
     --template=reveal-template.html \
     -V revealjs-url=./reveal-local
 ```
+
+## Animate.css Animations
+
+The project uses [Animate.css](https://animate.style/) to draw attention to our slides presentation button:
+
+```bash
+curl -o animatecss/animate.min.css \
+    https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css
+```
