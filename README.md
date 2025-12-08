@@ -71,7 +71,7 @@ gcc embed.c -I$LUA_INCLUDE -o embed -llua5.4 -lm -ldl
 
 ## Reveal.js Slides
 
-Reveal resources taken from [https://github.com/hakimel/reveal.js/releases/tag/5.2.1](this Reveal.js release)
+Reveal resources taken from [Reveal.js release 5.2.1](https://github.com/hakimel/reveal.js/releases/tag/5.2.1)
 
 Get local Reveal.js for generating slides:
 
